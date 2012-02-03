@@ -35,3 +35,16 @@ h1 .title {
 #cost table td {padding: 20px}
 
 .cost-header {font-weight: bold}
+
+.map {
+	
+	margin-top: 30px;
+	margin-bottom:50px;
+}
+#mapInterface {
+	margin: 0 auto;
+	
+	width: 650px;
+	height: 600px;
+}
+

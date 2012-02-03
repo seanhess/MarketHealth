@@ -8,7 +8,10 @@
 		<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/styles.css" />
 		<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
-
+		
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="http://mapstraction.googlecode.com/svn/trunk/source/mxn.js?(googlev3)" type="text/javascript"></script>
+	   
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -21,6 +24,20 @@
 				}
 				resize();
 				$(window).resize(resize);
+				
+				// Map JS
+				var map;
+				var mapDiv = "mapInterface";
+				var myPoint = new mxn.LatLonPoint(37.404196,-122.008194);
+
+				map = new mxn.Mapstraction(mapDiv, "googlev3");
+				map.setCenterAndZoom(myPoint, 7);
+				map.addControls({
+					pan: false,
+					map_type: false,
+					zoom: "small",
+				});
+				map.setOptions({enableScrollWheelZoom: true, enableDragging: true});
 			});
 		</script>
 	</head>
@@ -51,6 +68,9 @@
 				<tr class="cost-header"><td>USA</td><td>Utah</td></tr>
 				<tr><td>$350-400</td><td>$300-350</td></tr>
 			</table>
+		</div>
+		<div class="map">
+			<div id="mapInterface"></div>
 		</div>
 	</div>
 	
