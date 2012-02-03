@@ -3,18 +3,46 @@
 	<head>
 		<title>MarketHealth</title>
 		
+		<link rel="stylesheet/less" type="text/css" href="css/styles.less" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen" />
 		<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/less.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				function resize(){
+					$("#main").height($(window).height());
+				}
+				resize();
+				$(window).resize(resize);
+			});
+		</script>
 	</head>
 <body>
-	<div id="main">
-		
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">MarketHealth</a>
+				<ul class="nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12" id="main">
+			
+			bla bla bla<br/>
+			sds<br/>
+			dfsd<br/>
+			dasf
+		</div>
 	</div>
 	
 </body>
