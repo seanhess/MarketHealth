@@ -8,18 +8,30 @@
 	background: -ms-linear-gradient(top, #71c4ed 0%,#ffffff 29%); /* IE10+ */
 	background: linear-gradient(top, #71c4ed 0%,#ffffff 29%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#71c4ed', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-	height: 100%;
+	width: 100%;
 }
 
-#content {
-	margin: 0 auto;
-	margin-top: 38px;
-	width: 940px;
+.hero-unit {
+	margin-top: 60px;
 }
 
-#main h1 {
+h1 .title {
 	padding: 40px 0 0 20px;
+	font-size: 50px;
+}
+
+#cost {
+	text-align: center;
+	margin: 50px 0 0;
 	font-size: 40px;
 }
 
+#cost table {
+	margin: 0 auto;
+	margin-top: 30px;
+	font-size: 40px;
+	width: 500px;
+}
+#cost table td {padding: 20px}
 
+.cost-header {font-weight: bold}
