@@ -91,9 +91,12 @@
 						          <div class="control-group">
 						            <label class="control-label" for="amount">Amount</label>
 						            <div class="controls">
-						              <input type="text" class="input-xlarge" id="amount">
-						              <p class="help-block"></p>
-						            </div>
+										<div class="input-prepend">
+										<span class="add-on">$</span>
+						           		<input type="text" class="input-medium" id="amount">
+						             	<p class="help-block">Try to enter the exact amount on your bill.</p>
+						            	</div>
+									</div>
 						          </div>
 						          <div class="control-group">
 						            <label class="control-label" for="city">City</label>
@@ -163,7 +166,8 @@
 							            <label class="control-label" for="city">Center</label>
 							            <div class="controls">
 							              <input type="text" class="input-xlarge" id="center">
-							            </div>
+							         	<p class="help-block">The name of the center that did your MRI.</p>
+									</div>
 							        </div>
 									<div class="form-actions">
 									    <button type="submit" class="btn btn-primary">Submit</button>
