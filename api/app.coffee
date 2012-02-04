@@ -8,11 +8,11 @@ mri = require("./model/mri")
 mongo = require('mongodb-wrapper')
 
 # CONTROLLERS
-exports.createServer = ->
+exports.createServer = (db) ->
 
     app = express.createServer()
     
-    db = mongo.db("localhost", 27017, "mh") 
+    db ?= mongo.db("localhost", 27017, "mh") 
     mris = new mri.Mris(db) 
     
     # Universal Configuration
@@ -58,15 +58,19 @@ exports.createServer = ->
             res.send 200
 
     app.get '/mris', (req, res) ->
-        mris.findAll (err, mris) ->
+        sort = req.param 'sort'
+        mris.findAll sort, (err, mris) ->
             if err? then return res.send err, 500
             res.send mris
 
     app.get '/mris/state/:state', (req, res) ->
         state = req.param 'state'
-        mris.findByState state, (err, mris) ->
+        sort = req.param 'sort'
+        mris.findByState state, sort, (err, mris) ->
             if err? then return res.send err, 500
             res.send mris
+
+    # need to combine sort with 
 
     app
 

@@ -45,11 +45,15 @@ class Mris
     findAllStats: (cb) ->
         @find({}).toArray seq(convert, stats, cb)
 
-    findAll: (cb) ->
-        @find({}).toArray seq(convert, cb)
+    findAll: (sort, cb) ->
+        @find({})
+        .sort(toSort(sort))
+        .toArray seq(convert, cb)
 
-    findByState: (state, cb) ->
-        @find({state: state}).toArray seq(convert, cb)
+    findByState: (state, sort, cb) ->
+        @find({state: state})
+        .sort(toSort(sort))
+        .toArray seq(convert, cb)
 
         # what this would normally look like
         # this.find({}).toArray (err, docs) ->
@@ -64,6 +68,10 @@ class Mris
 # converts docs to Mri instances, cb-style
 convert = (docs, cb) -> cb null, docs.map toMri
 toMri = (doc) -> new Mri doc
+toSort = (field) -> 
+    sort = {}
+    if field? then sort[field] = 1
+    sort
 
 # Average the total 
 stats = (mris, cb) ->

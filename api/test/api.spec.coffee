@@ -3,6 +3,8 @@
 app = require('../app')
 should = require('should')
 common = require('../lib/common')
+mri = require('../model/mri')
+mongo = require('mongodb-wrapper')
 
 request = (app, method, path, params, body, cb) ->
 
@@ -25,20 +27,41 @@ request = (app, method, path, params, body, cb) ->
 m = 0
 
 describe 'api', ->
-    server = app.createServer()
+    # override the database
+    db = mongo.db("localhost", 27017, "test") 
+    server = app.createServer db
     request_ = request.partial server
+
+    describe 'setup', ->
+        it 'should remove all mris', (done) ->
+            mris = new mri.Mris(db)
+            mris.remove({}, done)
 
     describe 'post mri', ->
         it 'should post', (done) ->
-            request_ "POST", "/mris", {}, {amount: 10, state: "UT", city: "Provo", doctor: "Mr Bob"}, (v, code) ->
+
+            mris = [ {amount: 10, state: "UT", city: "Provo", doctor: "Mr Bob"}
+                   , {amount: 8, state: "UT", city: "Provo", doctor: "Mr Bob"} ]
+
+            request_ "POST", "/mris", {}, mris[0], (v, code) ->
                 v.should.be.equal(200)
-                done()
+                request_ "POST", "/mris", {}, mris[1], (v, code) ->
+                    v.should.be.equal(200)
+                    done()
 
     describe 'get mris', ->
         it 'should get all mris', (done) ->
             request_ "GET", "/mris", {}, {}, (mris) ->
                 mris.should.have.property('length')
-                mris.length.should.be.within(1, 9999999999999)
+                mris.length.should.be.equal(2)
+                mris[0].amount.should.be.equal(10)
+                done()
+
+        it 'should sort them mris', (done) ->
+            request_ "GET", "/mris", {sort: "amount"}, {}, (mris) ->
+                mris.should.have.property('length')
+                mris.length.should.be.equal(2)
+                mris[0].amount.should.be.equal(8)
                 done()
 
     describe 'get mris by state', ->

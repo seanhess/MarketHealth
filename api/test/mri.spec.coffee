@@ -9,23 +9,21 @@ mockdb =
     mris: {} 
 
 describe 'mris', ->
-    it 'should return a min and max greater than zero', (done) ->
-        mris = new mri.Mris(mockdb)
+    describe 'stats', ->
+        it 'should return a min and max greater than zero', (done) ->
+            mris = new mri.Mris(mockdb)
 
-        mris.find = -> 
-            { toArray: (cb) -> 
-                process.nextTick ->
-                    cb null, [{amount: 10}, {amount: 16}]
-            }
+            mris.find = -> 
+                { toArray: (cb) -> 
+                    process.nextTick ->
+                        cb null, [{amount: 10}, {amount: 16}]
+                }
 
-        mris.findAllStats (err, minMax) ->
-            if err? then return done err
-            minMax.max.should.equal(16)
-            minMax.min.should.equal(10)
-            done()
-        
-        # asyncSpecWait()
-
+            mris.findAllStats (err, minMax) ->
+                if err? then return done err
+                minMax.max.should.equal(16)
+                minMax.min.should.equal(10)
+                done()
 
         
 describe 'mri', ->
