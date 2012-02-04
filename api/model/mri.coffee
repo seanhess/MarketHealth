@@ -22,6 +22,7 @@ class Mri
         @comments = doc.comments if doc.comments
         @name = doc.name if doc.name
         @location = doc.location if doc.location # .lat .lng
+        @center = doc.center if doc.center # .lat .lng
 
     invalid: ->
         if not @amount? then return "amount is required"
@@ -32,6 +33,7 @@ class Mri
         if not @location? then return "location is required"
         if not @location.lat? then return "invalid location"
         if not @location.lng? then return "invalid location"
+        # TODO: center
         # comments are not required
         false
 

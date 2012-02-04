@@ -48,9 +48,10 @@ $(function() {
             var $row = $listRowTemplate.clone()
 
             $row.find(".amount").text(mri.amount)
+            $row.find(".name").text(mri.name)
             $row.find(".city").text(mri.city)
             $row.find(".state").text(mri.state)
-            $row.find(".doctor").text(mri.doctor)
+            $row.find(".center").text(mri.center)
 
             $list.append($row)
         }
