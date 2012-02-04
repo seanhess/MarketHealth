@@ -24,15 +24,14 @@ $(function() {
         $machine.cssTransitionEnd(function() {
 
             $bubbles.addClass('place')
+            $bubble.addClass('place')
             $bubbles.cssTransitionEnd(function() {
-                $bubble.addClass('place')
-                $bubble.cssTransitionEnd(function() {
+                // $bubble.cssTransitionEnd(function() {
                     $bubbleText.addClass('place')
-
-                })
+                    cb()
+                // })
             })
 
-            cb()
 
         })
     }

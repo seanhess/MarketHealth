@@ -1,15 +1,15 @@
 
 $(function() {
     var geocoder = new google.maps.Geocoder()
-    var $map = $("#mapInterface")
     var map;
 
     function drawMap(element) {
-        $map = $(elemeet)
+        $map = $(element)
         map = new google.maps.Map($map.get(0), {
             center: new google.maps.LatLng(38.203655, -99.228516),
             zoom: 4,
             minZoom: 4,
+            scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         })
     }
