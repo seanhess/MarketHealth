@@ -9,11 +9,19 @@ seq = flow.seq
 tocb = flow.tocb
 map = list.map
 
+ValidStates = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "AS", "GU", "MP", "PR", "VI", "FM", "MH", "PW", "AA", "AE", "AP", "CZ", "PI", "TT", "CM"]
+
+
 # convert to standard format
 class Mri 
     constructor: (doc) ->
-        @amount = doc.amount || 0
-        @state = doc.state
+        @amount = doc.amount if doc.amount
+        @state = doc.state if doc.state
+
+    invalid: ->
+        if not @amount? then return "amount is required"
+        if not (@state in ValidStates) then return "invalid state"
+        false
 
 class Mris
     constructor: -> 

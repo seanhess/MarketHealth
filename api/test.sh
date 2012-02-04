@@ -1,2 +1,2 @@
 #!/bin/bash
-jasmine-node .
+mocha --ignore-leaks 

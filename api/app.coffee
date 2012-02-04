@@ -4,14 +4,14 @@
 express = require('express')
 connect = require('connect')
 path = require('path')
-mris = require("./model/mris")
+mri = require("./model/mri")
 
 # CONTROLLERS
 exports.createServer = ->
 
     app = express.createServer()
     
-    mris = new mris.Mris() 
+    mris = new mri.Mris() 
     
     # Universal Configuration
     app.configure ->
@@ -26,24 +26,39 @@ exports.createServer = ->
     app.configure 'production', ->
         process.on 'uncaughtException', ->
             process.exit 1  # change me
+
+    app.get '/', (req, res) ->
+        res.send "HI"
     
     app.get '/health', (req, res) ->
         res.send 200
     
     app.get '/pricerange/us', (req, res) ->
         mris.findAllStats (err, minMax) ->
-            if err? then return res.send err
+            if err? then return res.send err, 500
             res.send minMax
 
-    app.get '/pricerange/:state', (req, res) ->
+    app.get '/pricerange/state/:state', (req, res) ->
         state = req.param 'state'
         mris.findStatsBystate state, (err, minMax) ->
-            if err? then return res.send err
+            if err? then return res.send err, 500
             res.send minMax
+
+    app.post '/mri', (req, res) ->
+        mri = new mri.Mri req.body
+
+        # check for a bad mri
+        if msg = mri.invalid()
+            return res.send (new Error(msg)), 400
+
+        mris.save mri, (err) ->
+            if err? then return res.send err, 500
+            res.send 200
+
+
+
     
-    app.get '/test/views', (req, res) ->
-        res.render 'test', {something:"HI"}
-    
+
     app
 
 if module == require.main
