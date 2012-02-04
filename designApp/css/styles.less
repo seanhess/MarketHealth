@@ -18,6 +18,11 @@
 	transition: @transitions;
 }
 
+.translate (@x, @y) {
+    transform: translate(@x, @y);
+    -webkit-transform: translate(@x, @y);
+}
+
 .box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
   box-shadow: @arguments;
   -moz-box-shadow: @arguments;
@@ -25,7 +30,7 @@
 }
 
 body {
-    background: url(/img/eggshell.jpg);
+    background: url(/img/bg.png) #EBEBEB;
 }
 
 .container {
@@ -47,22 +52,89 @@ h1 .title {
 
 
 #stripe {
-    margin-top: 100px;
+    margin-top: 40px;
     background: url(/img/banner-bg.png) repeat-x;
     height: 323px;
     position: relative;
+    z-index: 1;
 
     .machine {
         position: absolute;
-        right: 100px;
+        right: 50px;
+        .translate(450px, 0px);
+        .transition(500ms all ease);
+
+        .bubble {
+            font-weight: bold;
+            background: url(/img/bubble.png) no-repeat;
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            left: 33px;
+            top: 74px;
+            background-size: 100%;
+
+            .transition(500ms all ease);
+
+            &.place {
+                opacity: 1;
+                width: 177px;
+                height: 119px;
+                left: -55px;
+                top: 15px;
+            }
+
+            .text {
+                margin: 30px;
+                margin-left: 35px;
+                display: block;
+                width: 120px;
+                font-size: 16px;
+
+                opacity: 0;
+                .transition(500ms all ease);
+
+                &.place {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .bubbles {
+            background: url(/img/bubbles.png) no-repeat;
+            position: absolute;
+            width: 0px;
+            height: 39px;
+            left: 65px;
+            top: 125px;
+            .transition(500ms all ease);
+
+            &.place {
+                width: 70px;
+            }
+        }
+
+
+    }
+
+    .machine.place {
+        .translate(0px, 0px);
     }
 
     h1 {
-        font-size: 70px;
+        font-size: 55px;
         width: 500px;
-        line-height: 1em;
+        line-height: 1.2em;
         position: absolute;
         left: 100px;
+        top: 40px;
+        .translate(-600px, 0px);
+        .transition(500ms all ease);
+    }
+
+    h1.place {
+        opacity: 1;
+        .translate(0px, 0px);
     }
 }
 
@@ -147,20 +219,21 @@ a.addButton {
 // Animation
 .animateLoad {
     opacity: 0;
-    transform: translate(-800px,0px);
-    -webkit-transform: translate(-800px,0px);
+    .translate(-800px, 0px);
     .transition(500ms all ease);
 }
 
 .animateLoad.fromBottom {
-    transform: translate(0px,600px);
-    -webkit-transform: translate(0px,600px);
+    .translate(0, 600px);
+}
+
+.animateLoad.fromTop {
+    .translate(0, -300px);
 }
 
 .animateLoad.loaded {
     opacity: 1;
-    transform: translate(0px, 0px);
-    -webkit-transform: translate(0px, 0px);
+    .translate(0, 0);
 }
 
 

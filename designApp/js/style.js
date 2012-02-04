@@ -5,19 +5,51 @@ $(function() {
 
     // really, I want to wait until certain things are loaded instead
 
-    var itemsToLoad = $(".animateLoad").toArray()
+    animateMachine(function() {
+        animateAllRows()
+    })
 
-    function animateNext() {
-        var current = itemsToLoad.shift()
-        if (!current) return
-        $(current).addClass('loaded')
-        $(current).cssTransitionEnd(function() {
-            animateNext()
+
+    function animateMachine(cb) {
+        var $stripe = $("#stripe")
+        var $machine = $stripe.find(".machine")
+        var $h1 = $stripe.find("h1")
+
+        var $bubbles = $stripe.find(".bubbles")
+        var $bubble = $stripe.find(".bubble")
+        var $bubbleText = $stripe.find(".bubble .text")
+
+        $machine.addClass("place")
+        $h1.addClass("place")
+        $machine.cssTransitionEnd(function() {
+
+            $bubbles.addClass('place')
+            $bubbles.cssTransitionEnd(function() {
+                $bubble.addClass('place')
+                $bubble.cssTransitionEnd(function() {
+                    $bubbleText.addClass('place')
+
+                })
+            })
+
+            cb()
+
         })
     }
 
 
-    animateNext()
+    function animateAllRows() {
+        var itemsToLoad = $(".animateLoad").toArray()
+        function animateNext() {
+            var current = itemsToLoad.shift()
+            if (!current) return
+            $(current).addClass('loaded')
+            $(current).cssTransitionEnd(function() {
+                animateNext()
+            })
+        }
+        animateNext()
+    }
 })
 
 

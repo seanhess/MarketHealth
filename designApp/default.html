@@ -28,15 +28,25 @@
     <!-- -->
 
     <div id="stripe">
-        <h1>There's nothing funny about high medical costs</h1>
+        <h1>There&rsquo;s nothing funny about high medical costs</h1>
         <div class="machine">
             <img src="img/mri.png">
+            <div class="bubbles"></div>
+            <div class="bubble">
+                <span class="text">
+                    I wonder how much this is going to cost?
+                </span>
+            </div>
         </div>
     </div>
+
 	
 	<div class="container">
 
-		<div id="cost" class="animateLoad">An MRI costs:
+        <!-- Big button -->
+        <a class="btn btn-primary btn-large addButton animateLoad fromTop" href="add">How Much Was Yours?</a>
+
+		<div id="cost" class="animateLoad fromBottom">An MRI costs:
 			<table class="table cost">
 				<tbody>
 					<tr class="cost-header">
@@ -51,8 +61,6 @@
 			</table>
 		</div>
 
-        <!-- Bug button -->
-        <a class="btn btn-primary btn-large addButton animateLoad" href="add">How Much Was Yours?</a>
 
         <!-- Details -->
 		<div class="details animateLoad fromBottom">
