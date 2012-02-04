@@ -4,15 +4,11 @@
 		<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
 		<title>PriceMyMRI</title>
 		
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-        <!-- boostrap requires jquery -->
 		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		
 		
 		<link rel="stylesheet/less" type="text/css" href="css/styles.less">
-		<script src="http://lesscss.googlecode.com/files/less-1.0.21.min.js"></script>
+		<script src="js/less.min.js"></script>
 
 	</head>
 <body>
@@ -30,15 +26,17 @@
 		</div>
 	</div>
     <!-- -->
+
+    <div id="stripe">
+        <h1>There's nothing funny about high medical costs</h1>
+        <div class="machine">
+            <img src="img/mri.png">
+        </div>
+    </div>
 	
 	<div class="container">
-		<div class="hero-unit">
-			<img src="img/logo_big.png">
-		        <h1>PriceMyMRI</h1>
-		        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-		        <p><a class="btn btn-primary btn-large" href="about">Learn more &raquo;</a></p>
-		</div>
-		<div id="cost">An MRI costs:
+
+		<div id="cost" class="animateLoad">An MRI costs:
 			<table class="table cost">
 				<tbody>
 					<tr class="cost-header">
@@ -54,28 +52,30 @@
 		</div>
 
         <!-- Bug button -->
-        <a class="btn btn-primary btn-large addButton" href="add">How Much Was Yours?</a>
+        <a class="btn btn-primary btn-large addButton animateLoad" href="add">How Much Was Yours?</a>
 
         <!-- Details -->
-		<div class="details">
+		<div class="details animateLoad fromBottom">
 
+            <!--
             <ul class="controls">
-                <li class="active map"><a href="#map" data-toggle="pill">Map</a></li>
-                <li class="list"><a href="#list" data-toggle="pill">List</a></li>
+                <li class="active map"><a href="#map" data-toggle="pill"><div class="iconLabel">Map</div></a></li>
+                <li class="list"><a href="#list" data-toggle="pill"><div class="iconLabel">List</div></a></li>
             </ul>
+            -->
 
-			<div class="content">
-				<div class="tab-content">
-					<div id="map" class="tab-pane active">
-						<div id="mapInterface"></div>
-					</div>
-					<div id="list" class="tab-pane">
-                        <table class="list table table-striped">
-                            <tr class="header"><th>Price</th><th>State</th><th>City</th><th>Doctor</th></tr>
-                        </table>
-					</div>
-				</div>
-			</div>
+
+            <h3>MRI Prices</h3>
+
+            <div id="map">
+                <div id="mapInterface"></div>
+            </div>
+
+            <div id="list" class="animateLoad">
+                <table class="list table table-striped">
+                    <tr class="header"><th>Price</th><th>State</th><th>City</th><th>Doctor</th></tr>
+                </table>
+            </div>
 		</div>
 		<hr/>
 		<footer>&copy;2012 PriceMyMRI</footer>
@@ -87,6 +87,9 @@
             <tr class="listRow"><td class="amount">$672</td><td class="city">Salt Lake City</td><td class="state">UT</td><td class="doctor">Dr. Bob</td></tr>
         </table>
     </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
     <script type='text/javascript' src="js/style.js"></script>
     <script type='text/javascript' src="js/data.js"></script>

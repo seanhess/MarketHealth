@@ -11,10 +11,22 @@
   background: linear-gradient(top, @topColor 0%,@botColor @scale); 
 }
 
+.transition (@transitions) {
+	-webkit-transition: @transitions;
+	-moz-transition: @transitions;
+	-ms-transition: @transitions;
+	-o-transition: @transitions;
+	transition: @transitions;
+}
+
 .box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
   box-shadow: @arguments;
   -moz-box-shadow: @arguments;
   -webkit-box-shadow: @arguments;
+}
+
+body {
+    background: url(/img/eggshell.jpg);
 }
 
 .container {
@@ -32,6 +44,27 @@
 h1 .title {
 	padding: 40px 0 0 20px;
 	font-size: 50px;
+}
+
+
+#stripe {
+    margin-top: 100px;
+    background: url(/img/banner-bg.png) repeat-x;
+    height: 323px;
+    position: relative;
+
+    .machine {
+        position: absolute;
+        right: 100px;
+    }
+
+    h1 {
+        font-size: 70px;
+        width: 500px;
+        line-height: 1em;
+        position: absolute;
+        left: 100px;
+    }
 }
 
 #cost {
@@ -68,18 +101,33 @@ a.addButton {
 
         position: absolute;
         top: 0;
-        left: -100px;
+        left: -120px;
         width: 64px;
 
         li {
             list-style: none;
+            position: relative;
+            margin-bottom: 16px;
         
             a {
                 display: block;
                 width: 64px;
                 height: 84px;
+            }
+
+            .iconLabel {
+                position: absolute;
+                bottom: 0px;
                 text-align: center;
-                vertical-align: bottom;
+                width: 64px;
+            }
+
+            &.active {
+                background-color: #006CCC;
+            }
+
+            &.active a {
+                color: #FFF;
             }
         }
 
@@ -87,11 +135,37 @@ a.addButton {
             background: url(/img/map.png) transparent no-repeat;
         }
 
-        .list {
-
+        .list a {
+            background: url(/img/list.png) transparent no-repeat;
         }
     }
+
+    #list {
+        margin-top: 50px;
+
+    }
 }
+
+
+// Animation
+.animateLoad {
+    opacity: 0;
+    transform: translate(-800px,0px);
+    -webkit-transform: translate(-800px,0px);
+    .transition(500ms all ease);
+}
+
+.animateLoad.fromBottom {
+    transform: translate(0px,600px);
+    -webkit-transform: translate(0px,600px);
+}
+
+.animateLoad.loaded {
+    opacity: 1;
+    transform: translate(0px, 0px);
+    -webkit-transform: translate(0px, 0px);
+}
+
 
 // TEMPLATES
 #templates {
