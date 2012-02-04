@@ -6,16 +6,16 @@
 		
 		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/styles.css" />
 		<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
 		
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-		<script src="http://mapstraction.googlecode.com/svn/trunk/source/mxn.js?(googlev3)" type="text/javascript"></script>
-	   
+	
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/less.js"></script>
+		
+		<link rel="stylesheet/less" type="text/css" href="css/styles.less">
+		<script src="http://lesscss.googlecode.com/files/less-1.0.21.min.js"></script>
 		
 		<script type="text/javascript">
 			$(function(){
@@ -26,18 +26,36 @@
 				$(window).resize(resize);
 				
 				// Map JS
+				var addressArr = [
+					{"name": "Person", "address": "9750 S 300 W, Sandy, UT"},
+					{"name": "Person2", "address": "150 1st Avenue, Salt Lake City, UT"}
+				];
+				
 				var map;
 				var mapDiv = "mapInterface";
-				var myPoint = new mxn.LatLonPoint(37.404196,-122.008194);
-
-				map = new mxn.Mapstraction(mapDiv, "googlev3");
-				map.setCenterAndZoom(myPoint, 7);
-				map.addControls({
-					pan: false,
-					map_type: false,
-					zoom: "small",
+				
+				var myOptions = {
+					center: new google.maps.LatLng(-34.397, 150.644),
+					zoom: 9,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var map = new google.maps.Map(document.getElementById(mapDiv),myOptions);
+				
+				$(addressArr).each(function(i,location){
+					var geocoder = new google.maps.Geocoder();
+					var address = location.address;
+					geocoder.geocode( { 'address': address}, function(results, status) {
+					      if (status == google.maps.GeocoderStatus.OK) {
+						        map.setCenter(results[0].geometry.location);
+						        var marker = new google.maps.Marker({
+						            map: map,
+						            position: results[0].geometry.location
+						        });
+						      } else {
+						        alert("Geocode was not successful for the following reason: " + status);
+						  }
+					});
 				});
-				map.setOptions({enableScrollWheelZoom: true, enableDragging: true});
 			});
 		</script>
 	</head>
@@ -55,22 +73,41 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="hero-unit">
-		        <h1>PriceMyMRI</h1>
-		        <p>This is a template for a simple marketing or informational website. It includes a large callout
-			 called the hero unit and three supporting pieces of content. Use it as a starting point to 
-			create something more unique.</p>
-		        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+		<div id="cost">An MRI costs:
+		<table class="table cost">
+		<tbody>
+		<tr class="cost-header">
+		<th>USA</th>
+		<th>Utah</th>
+		</tr>
+		<tr>
+		<td>$350-400</td>
+		<td>$300-350</td>
+		</tr>
+		</tbody>
+		</table>
 		</div>
-		<div id="cost">
-			An MRI costs:
-			<table class="table cost">
-				<tr class="cost-header"><td>USA</td><td>Utah</td></tr>
-				<tr><td>$350-400</td><td>$300-350</td></tr>
-			</table>
+		<div class="row">
+		<div class="span3">
+		<ul class="nav nav-pills nav-stacked" style="font-size: 19px;">
+			<li class="active"><a href="#map" data-toggle="pill">Map</a></li>
+			<li><a href="#list" data-toggle="pill">List</a></li>
+		</ul>
 		</div>
-		<div class="map">
+		<div class="span9">
+		<div class="tab-content" style="height: 600px;">
+		<div id="map" class="tab-pane active">
 			<div id="mapInterface"></div>
+		</div>
+		<div id="list" class="tab-pane">
+		<table class="table table-striped">
+		<tr><th>Price</th><th>State</th><th>City</th><th>Doctor</th></tr>
+		<tr><td>$672</td><td>UT</td><td>Salt Lake City</td><td>Dr. Bob</td></tr>
+		<tr><td>$672</td><td>UT</td><td>Salt Lake City</td><td>Dr. Bob</td></tr>
+		</table>
+		</div>
+		</div>
+		</div>
 		</div>
 	</div>
 	

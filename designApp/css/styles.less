@@ -1,18 +1,46 @@
 
+@color1: black;
 
-.gradient (@bgcolor1: #000, @bgcolor2: #fff){
-	background: #1e5799;
-	background: -moz-linear-gradient(top, @bgcolor1 0%, @bgcolor1 100%); 
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@bgcolor1), color-stop(100%,@bgcolor1));
-	background: -webkit-linear-gradient(top, @bgcolor1 0%,@bgcolor1 100%); 
-	background: -o-linear-gradient(top, @bgcolor1 0%,@bgcolor1 100%); 
-	background: -ms-linear-gradient(top, @bgcolor1 0%,@bgcolor1 100%); 
-	background: linear-gradient(top, @bgcolor1 0%,@bgcolor1 100%); 
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@bgcolor1', endColorstr='@bgcolor2',GradientType=0 );
+.gradient (@topColor: black, @botColor: white, @scale: 50%) {
+  background: @botColor;
+  background: -moz-linear-gradient(top, @topColor 0%, @botColor @scale);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@topColor), color-stop(@scale,@botColor));
+  background: -webkit-linear-gradient(top, @topColor 0%,@botColor @scale);
+  background: -o-linear-gradient(top, @topColor 0%,@botColor @scale);
+  background: -ms-linear-gradient(top, @topColor 0%,@botColor @scale);
+  background: linear-gradient(top, @topColor 0%,@botColor @scale); 
 }
 
-#main {
-	margin-top: 38px;
-	.gradient(#1e5799,#fff);
-	
+.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
 }
+
+
+body {
+  .gradient (#71c4ed, #ffffff, 29%);
+}
+
+.hero-unit {
+	margin-top: 60px;
+}
+
+h1 .title {
+	padding: 40px 0 0 20px;
+	font-size: 50px;
+}
+
+#cost {
+	text-align: center;
+	margin: 50px 0 0;
+	font-size: 40px;
+  table {
+  	margin: 0 auto;
+  	margin-top: 30px;
+  	font-size: 40px;
+  	width: 500px;
+  	td, th {padding: 20px}
+  }
+}
+
