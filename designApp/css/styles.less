@@ -17,6 +17,10 @@
   -webkit-box-shadow: @arguments;
 }
 
+.container {
+    width: 800px;
+}
+
 .hero-unit {
 	margin-top: 60px;
 	img {
@@ -54,6 +58,41 @@ a.addButton {
     display: block;
 }
 
+
+// Icons
+.details {
+
+    position: relative;
+
+    ul.controls {
+
+        position: absolute;
+        top: 0;
+        left: -100px;
+        width: 64px;
+
+        li {
+            list-style: none;
+        
+            a {
+                display: block;
+                width: 64px;
+                height: 84px;
+                text-align: center;
+                vertical-align: bottom;
+            }
+        }
+
+        .map a {
+            background: url(/img/map.png) transparent no-repeat;
+        }
+
+        .list {
+
+        }
+    }
+}
+
 // TEMPLATES
 #templates {
     display: none;
@@ -61,7 +100,7 @@ a.addButton {
 
 
 #mapInterface {
-	width: 700px;
+	width: 800px;
 	height: 600px;
 }
 

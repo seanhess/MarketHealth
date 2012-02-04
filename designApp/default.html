@@ -36,7 +36,7 @@
 			<img src="img/logo_big.png">
 		        <h1>PriceMyMRI</h1>
 		        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-		        <p><a class="btn btn-primary btn-large" href="about.html">Learn more &raquo;</a></p>
+		        <p><a class="btn btn-primary btn-large" href="about">Learn more &raquo;</a></p>
 		</div>
 		<div id="cost">An MRI costs:
 			<table class="table cost">
@@ -52,23 +52,27 @@
 				</tbody>
 			</table>
 		</div>
-        <a class="btn btn-primary btn-large addButton">How Much Was Yours?</a>
-		<div class="row">
-			<div class="span3">
-				<ul class="nav nav-pills nav-stacked" style="font-size: 19px;">
-					<li class="active"><a href="#map" data-toggle="pill">Map</a></li>
-					<li><a href="#list" data-toggle="pill">List</a></li>
-				</ul>
-			</div>
-			<div class="span9">
-				<div class="tab-content" style="height: 600px;">
+
+        <!-- Bug button -->
+        <a class="btn btn-primary btn-large addButton" href="add">How Much Was Yours?</a>
+
+        <!-- Details -->
+		<div class="details">
+
+            <ul class="controls">
+                <li class="active map"><a href="#map" data-toggle="pill">Map</a></li>
+                <li class="list"><a href="#list" data-toggle="pill">List</a></li>
+            </ul>
+
+			<div class="content">
+				<div class="tab-content">
 					<div id="map" class="tab-pane active">
 						<div id="mapInterface"></div>
 					</div>
 					<div id="list" class="tab-pane">
-                    <table class="list table table-striped">
-                        <tr class="header"><th>Price</th><th>State</th><th>City</th><th>Doctor</th></tr>
-                    </table>
+                        <table class="list table table-striped">
+                            <tr class="header"><th>Price</th><th>State</th><th>City</th><th>Doctor</th></tr>
+                        </table>
 					</div>
 				</div>
 			</div>

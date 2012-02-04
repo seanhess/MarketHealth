@@ -17,13 +17,15 @@ exports.createServer = (db) ->
     
     db ?= mongo.db("localhost", 27017, "mh") 
     mris = new mri.Mris(db) 
+
+    public = path.join __dirname, "..", "designApp" 
     
     # Universal Configuration
     app.configure ->
         app.use connect.bodyParser()
         app.use connect.methodOverride()
         # app.use jsonp() 
-        app.use express.static(path.join __dirname, '..', 'designApp') 
+        app.use express.static public
     
     # Development Configuration
     app.configure 'development', ->
@@ -33,9 +35,6 @@ exports.createServer = (db) ->
         process.on 'uncaughtException', ->
             process.exit 1  # change me
 
-    app.get '/', (req, res) ->
-        res.send "HI"
-    
     app.get '/health', (req, res) ->
         res.send 200
     
@@ -73,6 +72,15 @@ exports.createServer = (db) ->
         mris.findByState state, sort, (err, mris) ->
             if err? then return res.send err, 500
             res.send mris
+
+    # serve .html files from the public folder
+    app.get '/', (req, res) ->
+        res.sendfile path.join public, "default.html"
+
+    app.get '/:file', (req, res) ->
+        file = req.param "file"
+        res.sendfile path.join public, file + ".html"
+    
 
     # need to combine sort with 
 
