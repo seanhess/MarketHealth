@@ -1,7 +1,3 @@
-
-// namespace for functions
-mh = {}
-
 $(function() {
     var $templates = $("#templates")
 
