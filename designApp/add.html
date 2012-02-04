@@ -9,135 +9,152 @@
         <!-- boostrap requires jquery -->
 		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-alert.js"></script>
+		<script type="text/javascript" src="js/application.js"></script>
+		<script type="text/javascript" src="js/add.js"></script>
+		<script type="text/javascript" src="js/map.js"></script>
 		
 		
 		<link rel="stylesheet/less" type="text/css" href="css/styles.less">
 		<script src="http://lesscss.googlecode.com/files/less-1.0.21.min.js"></script>
 	</head>
-<body>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="#">PriceMyMRI</a>
-				<ul class="nav">
-					<li><a href="default.html">Home</a></li>
-					<li><a href="about.html">Why?</a></li>
-					<li><a href="MRI.html">MRI?</a></li>
-					<li class="active"><a href="add.html">Add Your Results</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-    <!-- -->
+  <body>
+	  <div class="navbar navbar-fixed-top">
+		  <div class="navbar-inner">
+			  <div class="container">
+				  <a class="brand" href="#">PriceMyMRI</a>
+				  <ul class="nav">
+					  <li><a href="default.html">Home</a></li>
+					  <li><a href="about.html">Why?</a></li>
+					  <li><a href="MRI.html">MRI?</a></li>
+					  <li class="active"><a href="add.html">Add Your Results</a></li>
+				  </ul>
+			  </div>
+		  </div>
+	  </div>
 	
-	<div class="container">
-		<div class="hero-unit">
-			<img src="img/logo_sm.png" style="padding-top: 8px;">
-		        <h1>PriceMyMRI</h1>
-		</div>
+	  <div class="container">
+		  <div class="hero-unit">
+			  <img src="img/logo_sm.png" style="padding-top: 8px;">
+		    <h1>PriceMyMRI</h1>
+		  </div>
 		
-		<div class="row">
-			<div class="span3">
+		  <div class="row">
+			  <div class="span3">
 				
-			</div>
-			<div class="span9">
-				<form class="form-horizontal">
-					<fieldset>
-						<legend>How much was your MRI?</legend>
-						          <div class="control-group">
-						            <label class="control-label" for="amount">Amount</label>
-						            <div class="controls">
-										<div class="input-prepend">
+			  </div>
+			  <div class="span9">
+				  <div class="alert alert-error" style="display: none" id="add-errors">
+            <strong>Error!</strong> <span></span>
+          </div>
+          <form class="form-horizontal" id="add-results-form">
+					  <fieldset>
+						  <legend>How much was your MRI?</legend>
+						  <div class="control-group">
+						    <label class="control-label" for="amount">Amount</label>
+						    <div class="controls">
+									<div class="input-prepend">
 										<span class="add-on">$</span>
-						           		<input type="text" class="input-medium" id="amount">
-						             	<p class="help-block">Try to enter the exact amount on your bill.</p>
-						            	</div>
-									</div>
-						          </div>
-						          <div class="control-group">
-						            <label class="control-label" for="city">City</label>
-						            <div class="controls">
-						              <input type="text" class="input-xlarge" id="city">
-						            </div>
-						          </div>
-						          <div class="control-group">
-						            <label class="control-label" for="state">State</label>
-						            <div class="controls">
-						              <select id="state">
-						              		<option value="AK">AK</option>
-											<option value="AL">AL</option>
-											<option value="AR">AR</option>
-											<option value="AZ">AZ</option>
-											<option value="CA">CA</option>
-											<option value="CO">CO</option>
-											<option value="CT">CT</option>
-											<option value="DC">DC</option>
-											<option value="DE">DE</option>
-											<option value="FL">FL</option>
-											<option value="GA">GA</option>
-											<option value="HI">HI</option>
-											<option value="IA">IA</option>
-											<option value="ID">ID</option>
-											<option value="IL">IL</option>
-											<option value="IN">IN</option>
-											<option value="KS">KS</option>
-											<option value="KY">KY</option>
-											<option value="LA">LA</option>
-											<option value="MA">MA</option>
-											<option value="MD">MD</option>
-											<option value="ME">ME</option>
-											<option value="MI">MI</option>
-											<option value="MN">MN</option>
-											<option value="MO">MO</option>
-											<option value="MS">MS</option>
-											<option value="MT">MT</option>
-											<option value="NC">NC</option>
-											<option value="ND">ND</option>
-											<option value="NE">NE</option>
-											<option value="NH">NH</option>
-											<option value="NJ">NJ</option>
-											<option value="NM">NM</option>
-											<option value="NV">NV</option>
-											<option value="NY">NY</option>
-											<option value="OH">OH</option>
-											<option value="OK">OK</option>
-											<option value="OR">OR</option>
-											<option value="PA">PA</option>
-											<option value="RI">RI</option>
-											<option value="SC">SC</option>
-											<option value="SD">SD</option>
-											<option value="TN">TN</option>
-											<option value="TX">TX</option>
-											<option value="UT">UT</option>
-											<option value="VA">VA</option>
-											<option value="VT">VT</option>
-											<option value="WA">WA</option>
-											<option value="WI">WI</option>
-											<option value="WV">WV</option>
-											<option value="WY">WY</option>
-						              </select>
-						            </div>
-						          </div>
-									<div class="control-group">
-							            <label class="control-label" for="city">Center</label>
-							            <div class="controls">
-							              <input type="text" class="input-xlarge" id="center">
-							         	<p class="help-block">The name of the center that did your MRI.</p>
-									</div>
-							        </div>
-									<div class="form-actions">
-									    <button type="submit" class="btn btn-primary">Submit</button>
-									    <button type="reset" class="btn">Clear</button>
-									</div>
-					</fieldset>
-				</form>
-			</div>
-		</div>
-		<hr/>
-		<footer>&copy;2012 PriceMyMRI</footer>
-	</div>
-	<br/><br/>
-	
-	
-</body>
+						        <input type="text" class="input-medium" id="amount" name="amount">
+						        <p class="help-block">Try to enter the exact amount on your bill.</p>
+						      </div>
+								</div>
+						  </div>
+						  <div class="control-group">
+						    <label class="control-label" for="name">Name</label>
+						    <div class="controls">
+						      <input type="text" class="input-xlarge" id="name" name="name">
+						    </div>
+						  </div>
+						  <div class="control-group">
+						    <label class="control-label" for="city">City</label>
+						    <div class="controls">
+						      <input type="text" class="input-xlarge" id="city" name="city">
+						    </div>
+						  </div>
+						  <div class="control-group">
+						    <label class="control-label" for="state">State</label>
+						    <div class="controls">
+						      <select id="state" name="state">
+						        <option value="AK">AK</option>
+										<option value="AL">AL</option>
+										<option value="AR">AR</option>
+										<option value="AZ">AZ</option>
+										<option value="CA">CA</option>
+										<option value="CO">CO</option>
+										<option value="CT">CT</option>
+										<option value="DC">DC</option>
+										<option value="DE">DE</option>
+										<option value="FL">FL</option>
+										<option value="GA">GA</option>
+										<option value="HI">HI</option>
+										<option value="IA">IA</option>
+										<option value="ID">ID</option>
+										<option value="IL">IL</option>
+										<option value="IN">IN</option>
+										<option value="KS">KS</option>
+										<option value="KY">KY</option>
+										<option value="LA">LA</option>
+										<option value="MA">MA</option>
+										<option value="MD">MD</option>
+										<option value="ME">ME</option>
+										<option value="MI">MI</option>
+										<option value="MN">MN</option>
+										<option value="MO">MO</option>
+										<option value="MS">MS</option>
+										<option value="MT">MT</option>
+										<option value="NC">NC</option>
+										<option value="ND">ND</option>
+										<option value="NE">NE</option>
+										<option value="NH">NH</option>
+										<option value="NJ">NJ</option>
+										<option value="NM">NM</option>
+										<option value="NV">NV</option>
+										<option value="NY">NY</option>
+										<option value="OH">OH</option>
+										<option value="OK">OK</option>
+										<option value="OR">OR</option>
+										<option value="PA">PA</option>
+										<option value="RI">RI</option>
+										<option value="SC">SC</option>
+										<option value="SD">SD</option>
+										<option value="TN">TN</option>
+										<option value="TX">TX</option>
+										<option value="UT">UT</option>
+										<option value="VA">VA</option>
+										<option value="VT">VT</option>
+										<option value="WA">WA</option>
+										<option value="WI">WI</option>
+										<option value="WV">WV</option>
+										<option value="WY">WY</option>
+						      </select>
+						    </div>
+						  </div>
+							<div class="control-group">
+							  <label class="control-label" for="city">Center</label>
+							  <div class="controls">
+							    <input type="text" class="input-xlarge" id="center" name="center">
+							    <p class="help-block">The name of the center that did your MRI.</p>
+								</div>
+							</div>
+							<div class="control-group">
+							  <label class="control-label" for="city">Comments</label>
+							  <div class="controls">
+							    <input type="text" class="input-xlarge" id="comments" name="comments">
+							    <p class="help-block">Anything special about your visit? What went well? What didn't?</p>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="reset" class="btn">Clear</button>
+							</div>
+					  </fieldset>
+				  </form>
+			  </div>
+		  </div>
+		  <hr/>
+		  <footer>&copy;2012 PriceMyMRI</footer>
+	  </div>
+	  <br/><br/>
+  </body>
 </html>

@@ -17,7 +17,6 @@ class Mri
     constructor: (doc) ->
         @amount = doc.amount if doc.amount
         @state = doc.state if doc.state
-        @doctor = doc.doctor if doc.doctor
         @date = doc.date || Date.now()
         @city = doc.city if doc.state
         @comments = doc.comments if doc.comments
@@ -28,7 +27,6 @@ class Mri
         if not @amount? then return "amount is required"
         if not (@state in ValidStates) then return "invalid state"
         if not @city? then return "city is required"
-        if not @doctor? then return "doctor is required"
         if not @date? then return "date is required"
         if not @name? then return "name is required"
         if not @location? then return "location is required"

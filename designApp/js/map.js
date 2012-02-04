@@ -1,15 +1,18 @@
 
 $(function() {
-    var $map = $("#mapInterface")
     var geocoder = new google.maps.Geocoder()
+    var $map = $("#mapInterface")
+    var map;
 
-    var map = new google.maps.Map($map.get(0), {
-        center: new google.maps.LatLng(38.203655, -99.228516),
-        zoom: 4,
-        minZoom: 4,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    })
-
+    function drawMap(element) {
+        $map = $(elemeet)
+        map = new google.maps.Map($map.get(0), {
+            center: new google.maps.LatLng(38.203655, -99.228516),
+            zoom: 4,
+            minZoom: 4,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        })
+    }
 
     function setMap(mris) {
         for (var i = 0; i < mris.length; i++) {
@@ -42,6 +45,7 @@ $(function() {
 
     // allow other modules to call this (the data module)
     mh.map = {
+        drawMap: drawMap,
         setMap: setMap,
         locationForAddress: locationForAddress
     }

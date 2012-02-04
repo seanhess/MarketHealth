@@ -54,7 +54,7 @@ exports.createServer = (db) ->
 
         # check for a bad mri
         if msg = m.invalid()
-            return res.send (new Error(msg)), 400
+            return res.send {error: msg}, 400
 
         mris.save m, (err, doc) ->
             if err? then return res.send err, 500
