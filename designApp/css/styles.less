@@ -29,6 +29,17 @@
   -webkit-box-shadow: @arguments;
 }
 
+@infocolor: rgb(200, 220, 240);
+
+.infobox {
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  padding: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: darker(@infocolor, 10%);
+}
+
 body {
     background: url(/img/bg.png) #EBEBEB;
 }
@@ -280,11 +291,11 @@ a.addButton {
     height: 150px;
     width: 800px;
     .col {
+      .infobox;
       background: rgb(200, 220, 240);
-      padding: 15px;
       margin: 0 20px 0 0;
       float: left;
-      width: 222px;
+      width: 234px;
       h1 {height: 75px;}
       p {
         padding: 15px 0 15px 0;

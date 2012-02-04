@@ -1,7 +1,5 @@
 $(function() {
     var $btn = $('button.add')
-    console.log($btn)
-
 
     // really, I want to wait until certain things are loaded instead
 
