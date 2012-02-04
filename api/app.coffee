@@ -23,7 +23,6 @@ exports.createServer = (db) ->
         app.use connect.bodyParser()
         app.use connect.methodOverride()
         # app.use jsonp() 
-        console.log __dirname + "../designApp"
         app.use express.static(path.join __dirname, '..', 'designApp') 
     
     # Development Configuration
