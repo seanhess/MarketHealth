@@ -5,7 +5,7 @@ $(function() {
     // Load Data
     loadMris()
     function loadMris() {
-        $.get('/mris', function(mris) {
+        $.get('/mris?sort=amount', function(mris) {
             setList(mris)
             mh.map.setMap(mris)
         })
