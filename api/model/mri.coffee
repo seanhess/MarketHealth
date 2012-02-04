@@ -13,48 +13,53 @@ map = list.map
 class Mri 
     constructor: (doc) ->
         @amount = doc.amount || 0
+        @state = doc.state
 
 class Mris
     constructor: -> 
         db = mongo.db("localhost", 27017, "mh")
-        db.collection('mris')
-        # fancy way to force the collection to extend this class and keep its stuff
-        db.mris.__proto__ = Mris.prototype 
+        db.collection('mris') # we don't have proxies, so you have to tell it the collection name
+        db.mris extends Mris.prototype
         return db.mris
 
-    statsState: (cb) ->
-        @find({state: state}).toArray seq(convert, stats, cb) # loses its this operator
+    # needs scale. 
+    findStatsByState: (state, cb) ->
+        @find({state: state}).toArray seq(convert, stats, cb)
 
-    stats: (cb) ->
-        @find({}).toArray seq(convert, stats, cb) # loses its this operator
+    findAllStats: (cb) ->
+        @find({}).toArray seq(convert, stats, cb)
+
+        # what this would normally look like
+        # this.find({}).toArray (err, docs) ->
+        #     if err? then return cb err
+        #     mris = docs.map (doc) -> new Mri doc
+        #     minMax = stats(docs)
+        #     cb null, minMax
 
 
-# converts docs to Mri instances, cb-stype
-convert = (docs, cb) -> 
-    cb null, map toMri, docs
 
+
+# converts docs to Mri instances, cb-style
+convert = (docs, cb) -> cb null, docs.map toMri
 toMri = (doc) -> new Mri doc
 
 # Average the total 
-stats = (docs, cb) ->
-    min = 0
-    max = 0
-    for doc in docs
-        if doc.amount? 
-            if doc.amount < min
-                min = doc.amount
-            if doc.amount > max
-                max = doc.amount
+stats = (mris, cb) ->
+    for mri in mris
+        continue unless mri.amount?
+        min = mri.amount if mri.amount < min || not min?
+        max = mri.amount if mri.amount > max || not max?
 
     cb null, {min: min, max: max}
 
+# {a} = {a: a} in coffeescript
+exports extends {Mris, Mri}
 
 
-exports.Mris = Mris
+
 if module == require.main
-    console.log("HI")
     mris = new exports.Mris() 
-    mris.stats (err, res) ->
+    mris.findAllStats (err, res) ->
         console.log("DONE", err, res)
 
 # Mris.prototype.averageScoreState = function(state, cb) {
