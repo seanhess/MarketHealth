@@ -1,3 +1,5 @@
-*.js
+model/*.js
+test/*.js
+app.js
 node_modules
 

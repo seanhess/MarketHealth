@@ -21,6 +21,7 @@ class Mri
         @date = doc.date || Date.now()
         @city = doc.city if doc.state
         @comments = doc.comments if doc.comments
+        @name = doc.name if doc.name
 
     invalid: ->
         if not @amount? then return "amount is required"
@@ -28,6 +29,7 @@ class Mri
         if not @city? then return "city is required"
         if not @doctor? then return "doctor is required"
         if not @date? then return "date is required"
+        if not @name? then return "name is required"
         # comments are not required
         false
 
