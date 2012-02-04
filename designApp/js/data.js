@@ -3,6 +3,27 @@ $(function() {
 
 
 
+    // Prices
+    loadCosts()
+
+    var $usCost = $("#cost .cost .us")
+    var $localCost = $("#cost .cost .local")
+
+    function loadCosts() {
+        $.get('/pricerange/us', function(data) {
+            $usCost.find(".min").text(data.min)
+            $usCost.find(".max").text(data.max)
+        })
+
+        $.get('/pricerange/state/UT', function(data) {
+            $localCost.find(".min").text(data.min)
+            $localCost.find(".max").text(data.max)
+        })
+
+    }
+
+
+
 
     // Load List
     loadMris()
