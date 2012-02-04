@@ -7,6 +7,9 @@ path = require('path')
 mri = require("./model/mri")
 mongo = require('mongodb-wrapper')
 
+# the jsonp middleware didn't work. Not compatible with latest express?
+# jsonp = require('connect-jsonp')
+
 # CONTROLLERS
 exports.createServer = (db) ->
 
@@ -19,6 +22,7 @@ exports.createServer = (db) ->
     app.configure ->
         app.use connect.bodyParser()
         app.use connect.methodOverride()
+        # app.use jsonp() 
         app.use express.static(__dirname + '/public') 
     
     # Development Configuration
