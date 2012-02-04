@@ -18,8 +18,6 @@ exports.createServer = ->
         app.use connect.bodyParser()
         app.use connect.methodOverride()
         app.use express.static(__dirname + '/public')
-        app.set 'views', path.join(__dirname, 'views')
-        app.set "view engine", "ejs"
     
     # Development Configuration
     app.configure 'development', ->

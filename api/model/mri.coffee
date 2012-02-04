@@ -3,39 +3,58 @@ mongo = require('mongodb-wrapper')
 common = require('../lib/common')
 
 flow = require('../lib/flow')
+list = require('../lib/list')
 s = flow.s
 seq = flow.seq
+tocb = flow.tocb
+map = list.map
 
+# convert to standard format
+class Mri 
+    constructor: (doc) ->
+        @amount = doc.amount || 0
 
 class Mris
     constructor: -> 
         db = mongo.db("localhost", 27017, "mh")
         db.collection('mris')
-        db.mris.__proto__ = Mris.prototype  # extend this class, still keep all collection functions
+        # fancy way to force the collection to extend this class and keep its stuff
+        db.mris.__proto__ = Mris.prototype 
         return db.mris
-exports.Mris = Mris
 
-Mris.prototype.averageState = (cb) ->
-    this.find({state: state}).toArray seq(avg, cb) # loses its this operator
+    statsState: (cb) ->
+        @find({state: state}).toArray seq(convert, stats, cb) # loses its this operator
 
-Mris.prototype.average = (cb) ->
-    this.find({}).toArray seq(avg, cb) # loses its this operator
+    stats: (cb) ->
+        @find({}).toArray seq(convert, stats, cb) # loses its this operator
 
-avg = (docs, cb) ->
-    total = 0
-    num = 0
+
+# converts docs to Mri instances, cb-stype
+convert = (docs, cb) -> 
+    cb null, map toMri, docs
+
+toMri = (doc) -> new Mri doc
+
+# Average the total 
+stats = (docs, cb) ->
+    min = 0
+    max = 0
     for doc in docs
-        if doc.amount?
-            total += doc.amount
-            num++
-    cb null, total / num
+        if doc.amount? 
+            if doc.amount < min
+                min = doc.amount
+            if doc.amount > max
+                max = doc.amount
+
+    cb null, {min: min, max: max}
 
 
 
+exports.Mris = Mris
 if module == require.main
     console.log("HI")
     mris = new exports.Mris() 
-    mris.average (err, res) ->
+    mris.stats (err, res) ->
         console.log("DONE", err, res)
 
 # Mris.prototype.averageScoreState = function(state, cb) {
