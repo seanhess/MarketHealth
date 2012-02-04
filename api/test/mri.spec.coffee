@@ -29,7 +29,7 @@ describe 'mris', ->
 describe 'mri', ->
     describe 'validate', ->
         it 'returns true if valid', ->
-            m = new mri.Mri {amount: 10, state: "UT", doctor: "bob", city: "Provo", comments: "woot", name: "Sean Hess"}
+            m = new mri.Mri {amount: 10, state: "UT", doctor: "bob", city: "Provo", comments: "woot", name: "Sean Hess", location: {lat: 10, lng: 10}}
             m.invalid().should.equal(false)
             # expect(m.invalid()).toBe(false)
 

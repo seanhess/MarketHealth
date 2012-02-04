@@ -1,62 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
 		<title>PriceMyMRI</title>
 		
-		
 		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
-		<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
 		
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		
 		<link rel="stylesheet/less" type="text/css" href="css/styles.less">
 		<script src="http://lesscss.googlecode.com/files/less-1.0.21.min.js"></script>
-		
-		<script type="text/javascript">
-			$(function(){
-				function resize(){
-					$("#main").height($(window).height());
-				}
-				resize();
-				$(window).resize(resize);
-				
-				// Map JS
-				var addressArr = [
-					{"name": "Person", "address": "9750 S 300 W, Sandy, UT"},
-					{"name": "Person2", "address": "150 1st Avenue, Salt Lake City, UT"}
-				];
-				
-				var map;
-				var mapDiv = "mapInterface";
-				
-				var myOptions = {
-					center: new google.maps.LatLng(-34.397, 150.644),
-					zoom: 9,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				var map = new google.maps.Map(document.getElementById(mapDiv),myOptions);
-				
-				$(addressArr).each(function(i,location){
-					var geocoder = new google.maps.Geocoder();
-					var address = location.address;
-					geocoder.geocode( { 'address': address}, function(results, status) {
-					      if (status == google.maps.GeocoderStatus.OK) {
-						        map.setCenter(results[0].geometry.location);
-						        var marker = new google.maps.Marker({
-						            map: map,
-						            position: results[0].geometry.location
-						        });
-						      } else {
-						        alert("Geocode was not successful for the following reason: " + status);
-						  }
-					});
-				});
-			});
-		</script>
+
 	</head>
 <body>
 	<div class="navbar navbar-fixed-top">
@@ -126,6 +81,11 @@
     </div>
 
     <script type='text/javascript' src="js/data.js"></script>
+
+
+    <!-- Load map last (change to load on demand eventually. AMD?) -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type='text/javascript' src="js/map.js"></script>
 	
 </body>
 </html>

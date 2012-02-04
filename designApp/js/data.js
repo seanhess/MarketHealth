@@ -1,5 +1,19 @@
+
+// namespace for functions
+mh = {}
+
 $(function() {
     var $templates = $("#templates")
+
+
+    // Load Data
+    loadMris()
+    function loadMris() {
+        $.get('/mris', function(mris) {
+            setList(mris)
+            mh.map.setMap(mris)
+        })
+    }
 
 
 
@@ -19,23 +33,15 @@ $(function() {
             $localCost.find(".min").text(data.min)
             $localCost.find(".max").text(data.max)
         })
-
     }
 
 
 
 
     // Load List
-    loadMris()
 
     var $list = $("#list .list")
     var $listRowTemplate = $("#templates .listRow")
-
-    function loadMris() {
-        $.get('/mris', function(mris) {
-            setList(mris)
-        })
-    }
 
     function setList(mris) {
         // clear existing list rows

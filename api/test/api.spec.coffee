@@ -40,8 +40,8 @@ describe 'api', ->
     describe 'post mri', ->
         it 'should post', (done) ->
 
-            mris = [ {name: "Sean Hess", amount: 10, state: "UT", city: "Provo", doctor: "Mr Bob"}
-                   , {name: "Sean Hess", amount: 8, state: "UT", city: "Provo", doctor: "Mr Bob"} ]
+            mris = [ {name: "Sean Hess", amount: 10, state: "UT", city: "Provo", doctor: "Mr Bob", location: {lat: -34.397, lng: 150.644}}
+                   , {name: "Sean Hess", amount: 8, state: "UT", city: "Provo", doctor: "Mr Bob", location: {lat: -34.397, lng: 150.644}} ]
 
             request_ "POST", "/mris", {}, mris[0], (v, code) ->
                 v.should.be.equal(200)
