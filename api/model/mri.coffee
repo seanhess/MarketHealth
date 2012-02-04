@@ -17,15 +17,23 @@ class Mri
     constructor: (doc) ->
         @amount = doc.amount if doc.amount
         @state = doc.state if doc.state
+        @doctor = doc.doctor if doc.doctor
+        @date = doc.date || Date.now()
+        @city = doc.city if doc.state
+        @comments = doc.comments if doc.comments
 
     invalid: ->
         if not @amount? then return "amount is required"
         if not (@state in ValidStates) then return "invalid state"
+        if not @city? then return "city is required"
+        if not @doctor? then return "doctor is required"
+        if not @date? then return "date is required"
+        # comments are not required
         false
 
+
 class Mris
-    constructor: -> 
-        db = mongo.db("localhost", 27017, "mh")
+    constructor: (db) -> 
         db.collection('mris') # we don't have proxies, so you have to tell it the collection name
         db.mris extends Mris.prototype
         return db.mris
@@ -62,6 +70,8 @@ stats = (mris, cb) ->
 
 # {a} = {a: a} in coffeescript
 exports extends {Mris, Mri}
+
+
 
 
 

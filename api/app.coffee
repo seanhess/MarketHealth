@@ -5,13 +5,15 @@ express = require('express')
 connect = require('connect')
 path = require('path')
 mri = require("./model/mri")
+mongo = require('mongodb-wrapper')
 
 # CONTROLLERS
 exports.createServer = ->
 
     app = express.createServer()
     
-    mris = new mri.Mris() 
+    db = mongo.db("localhost", 27017, "mh") 
+    mris = new mri.Mris(db) 
     
     # Universal Configuration
     app.configure ->
@@ -45,13 +47,13 @@ exports.createServer = ->
             res.send minMax
 
     app.post '/mri', (req, res) ->
-        mri = new mri.Mri req.body
+        m = new mri.Mri req.body
 
         # check for a bad mri
-        if msg = mri.invalid()
+        if msg = m.invalid()
             return res.send (new Error(msg)), 400
 
-        mris.save mri, (err) ->
+        mris.save m, (err) ->
             if err? then return res.send err, 500
             res.send 200
 

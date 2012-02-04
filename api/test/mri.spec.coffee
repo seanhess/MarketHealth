@@ -3,9 +3,14 @@
 mri = require('../model/mri')
 should = require('should')
 
+
+mockdb = 
+    collection: ->
+    mris: {} 
+
 describe 'mris', ->
     it 'should return a min and max greater than zero', (done) ->
-        mris = new mri.Mris()
+        mris = new mri.Mris(mockdb)
 
         mris.find = -> 
             { toArray: (cb) -> 
@@ -26,7 +31,7 @@ describe 'mris', ->
 describe 'mri', ->
     describe 'validate', ->
         it 'returns true if valid', ->
-            m = new mri.Mri {amount: 10, state: "UT"}
+            m = new mri.Mri {amount: 10, state: "UT", doctor: "bob", city: "Provo", comments: "woot"}
             m.invalid().should.equal(false)
             # expect(m.invalid()).toBe(false)
 
