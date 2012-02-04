@@ -6,6 +6,7 @@ $(function() {
     var map = new google.maps.Map($map.get(0), {
         center: new google.maps.LatLng(38.203655, -99.228516),
         zoom: 4,
+        minZoom: 4,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     })
 
@@ -13,9 +14,6 @@ $(function() {
     function setMap(mris) {
         for (var i = 0; i < mris.length; i++) {
             var mri = mris[i]
-
-            // var address = mri.city + ", " + mri.state
-
 
             var marker = new google.maps.Marker({
                 map: map,
