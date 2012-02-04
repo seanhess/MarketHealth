@@ -45,6 +45,12 @@ class Mris
     findAllStats: (cb) ->
         @find({}).toArray seq(convert, stats, cb)
 
+    findAll: (cb) ->
+        @find({}).toArray seq(convert, cb)
+
+    findByState: (state, cb) ->
+        @find({state: state}).toArray seq(convert, cb)
+
         # what this would normally look like
         # this.find({}).toArray (err, docs) ->
         #     if err? then return cb err

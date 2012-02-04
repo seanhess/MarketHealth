@@ -42,24 +42,31 @@ exports.createServer = ->
 
     app.get '/pricerange/state/:state', (req, res) ->
         state = req.param 'state'
-        mris.findStatsBystate state, (err, minMax) ->
+        mris.findStatsByState state, (err, minMax) ->
             if err? then return res.send err, 500
             res.send minMax
 
-    app.post '/mri', (req, res) ->
+    app.post '/mris', (req, res) ->
         m = new mri.Mri req.body
 
         # check for a bad mri
         if msg = m.invalid()
             return res.send (new Error(msg)), 400
 
-        mris.save m, (err) ->
+        mris.save m, (err, doc) ->
             if err? then return res.send err, 500
             res.send 200
 
+    app.get '/mris', (req, res) ->
+        mris.findAll (err, mris) ->
+            if err? then return res.send err, 500
+            res.send mris
 
-
-    
+    app.get '/mris/state/:state', (req, res) ->
+        state = req.param 'state'
+        mris.findByState state, (err, mris) ->
+            if err? then return res.send err, 500
+            res.send mris
 
     app
 

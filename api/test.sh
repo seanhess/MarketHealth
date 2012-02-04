@@ -1,2 +1,3 @@
 #!/bin/bash
-mocha --ignore-leaks 
+# don't run both coffee and js files!
+mocha --ignore-leaks test/*.js

@@ -30,8 +30,22 @@ describe 'api', ->
 
     describe 'post mri', ->
         it 'should post', (done) ->
-            request_ "POST", "/mri", {}, {amount: 10, state: "UT", city: "Provo", doctor: "Mr Bob"}, (v, code) ->
+            request_ "POST", "/mris", {}, {amount: 10, state: "UT", city: "Provo", doctor: "Mr Bob"}, (v, code) ->
                 v.should.be.equal(200)
+                done()
+
+    describe 'get mris', ->
+        it 'should get all mris', (done) ->
+            request_ "GET", "/mris", {}, {}, (mris) ->
+                mris.should.have.property('length')
+                mris.length.should.be.within(1, 9999999999999)
+                done()
+
+    describe 'get mris by state', ->
+        it 'should get some mris for utah', (done) ->
+            request_ "GET", "/mris/state/:state", {state: "UT"}, {}, (mris) ->
+                mris.should.have.property('length')
+                mris.length.should.be.within(1, 9999999999999)
                 done()
             
 
