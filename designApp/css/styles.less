@@ -32,12 +32,13 @@
 @infocolor: rgb(200, 220, 240);
 
 .infobox {
-  -moz-border-radius: 9px;
-  border-radius: 9px;
-  padding: 8px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: darker(@infocolor, 10%);
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    padding: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: darker(@infocolor, 10%);
+    background-color: #D4D4D4;
 }
 
 body {
@@ -161,13 +162,22 @@ h1 .title {
 	text-align: center;
 	margin: 40px 0 40px 0;
 	font-size: 40px;
-  table {
-  	margin: 0 auto;
-  	margin-top: 30px;
-  	font-size: 40px;
-  	width: 500px;
-  	td, th {padding: 20px}
-  }
+
+    .lbl {
+        float: left;
+        height: 200px;
+        margin-top: 65px;
+    }
+
+    table {
+        margin: 0 auto;
+        margin-top: 30px;
+        font-size: 40px;
+        width: 550px;
+        td, th {
+            padding: 20px
+        }
+    }
 }
 
 // Add button

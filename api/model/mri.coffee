@@ -83,8 +83,8 @@ toSort = (field) ->
 stats = (mris, cb) ->
     for mri in mris
         continue unless mri.amount?
-        min = mri.amount if mri.amount < min || not min?
-        max = mri.amount if mri.amount > max || not max?
+        min = mri.amount if mri.amount > min || not min?
+        max = mri.amount if mri.amount < max || not max?
 
     cb null, {min: min, max: max}
 
