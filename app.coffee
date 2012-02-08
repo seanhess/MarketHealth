@@ -87,5 +87,6 @@ exports.createServer = (db) ->
     app
 
 if module == require.main
+    port = process.env.PORT || 3000
     app = exports.createServer()
-    app.listen 4001
+    app.listen port
