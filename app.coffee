@@ -18,7 +18,7 @@ exports.createServer = (db) ->
     db ?= mongo.db("localhost", 27017, "mh") 
     mris = new mri.Mris(db) 
 
-    public = path.join __dirname, "..", "designApp" 
+    public = path.join __dirname, "public"
     
     # Universal Configuration
     app.configure ->
