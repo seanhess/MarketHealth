@@ -90,3 +90,4 @@ if module == require.main
     port = process.env.PORT || 3000
     app = exports.createServer()
     app.listen port
+    console.log("CHECKING ENV", process.env)
