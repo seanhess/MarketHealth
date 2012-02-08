@@ -16,6 +16,16 @@ exports.createServer = (db) ->
     app = express.createServer()
     
     db ?= mongo.db("localhost", 27017, "mh") 
+
+    if process.env.MONGOHQ_URL?
+        # mongodb://heroku:a5acba1ebb4a8f77d7cd4d5a61370ea2@staff.mongohq.com:10085/app2813939
+        m = process.env.MONGOHQ_URL.match(/mongodb:\/\/(.*):(\d+)\/(\w+)/) # :(\d+)\/(w+)/)
+        host = m[1]
+        port = parseInt m[2], 10
+        dbname = m[3]
+        db = mongo.db(host, port, dbname)
+        console.log("MONGO", host, port, dbname)
+
     mris = new mri.Mris(db) 
 
     public = path.join __dirname, "public"
@@ -90,4 +100,3 @@ if module == require.main
     port = process.env.PORT || 3000
     app = exports.createServer()
     app.listen port
-    console.log("CHECKING ENV", process.env)
